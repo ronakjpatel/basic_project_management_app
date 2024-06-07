@@ -15,6 +15,16 @@ function App() {
     });
   }
 
+  function handleCancelAddUser() {
+    setProjectState((prev) => {
+      return {
+        ...prev,
+        projects: [...prev.projects],
+        currentProjectID: 0,
+      };
+    });
+  }
+
   function handleAddedUserValues(projectDetails) {
     const newProject = {
       ...projectDetails,
@@ -38,7 +48,10 @@ function App() {
           projects={projectState.projects}
         />
         {projectState.currentProjectID == 1 && (
-          <NewProject addDetails={handleAddedUserValues} />
+          <NewProject
+            onSaveDetails={handleAddedUserValues}
+            onCancel={handleCancelAddUser}
+          />
         )}
 
         {projectState.currentProjectID == 0 && (
